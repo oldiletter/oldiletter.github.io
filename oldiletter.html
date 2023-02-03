@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>올디레터 카카오톡 공유</title>
+</head>
+<body>
+
+  
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <script type="text/javascript">
+  Kakao.init('61ffeebc2e1021597ac0e7b55ffe7b86');
+  console.log(Kakao.isInitialized());
+
+  window.onload=function() {
+    const urlParams = new URL(location.href).searchParams;
+
+    const stibeeURL = urlParams.get('url');
+    const issue = urlParams.get('issue');
+
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '올디레터 ' + issue + '호', // 공유하기 제목 (검정 글씨)
+        description: '올디레터 뉴스레터 ' + issue + '호입니다.', // 공유하기 설명 (반투명 글씨)
+        imageUrl: 'https://cdn.imweb.me/thumbnail/20230117/fc6091dc0c833.png', // 커버로 뜨는 이미지 (해당 뉴스레터 이미지를 넣어도 됨)
+        link: {
+          mobileWebUrl: stibeeURL, // stibee 링크 (모바일)
+          webUrl: stibeeURL, // stibee 링크
+        },
+      },
+      buttons: [
+        {
+          title: '웹으로 보기', // 버튼에 적히는 글씨
+          link: {
+            mobileWebUrl: stibeeURL, // stibee 링크 (모바일)
+            webUrl: stibeeURL, // stibee 링크
+          },
+        },
+      ],
+      // 카카오톡 미설치 시 카카오톡 설치 경로이동
+      installTalk: true,
+    });
+
+    window.open('','_self').close();
+  }
+
+  </script>
+</body>
+</html>
