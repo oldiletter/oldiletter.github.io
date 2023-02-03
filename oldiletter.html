@@ -44,6 +44,12 @@
       // 카카오톡 미설치 시 카카오톡 설치 경로이동
       installTalk: true,
     });
+
+    setTimeout(() => goToURL(stibeeURL), 2000);
+  }
+
+  goToURL = function(stibeeURL) {
+    window.location.href = stibeeURL;
   }
 
   </script>
